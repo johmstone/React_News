@@ -1,0 +1,14 @@
+{
+    "NewsAPI": {
+        "MainURL": "https://newsapi.org",
+        "API_Key": "2ee8790188914db385c9599d220d9848"
+    },
+    "TheGuardianAPI": {
+        "MainURL": "https://content.guardianapis.com",
+        "API_Key": "9fe7f97b-f7ba-4703-8b93-b19138d1b5a5"
+    },
+    "NewTimesAPI": {
+        "MainURL": "https://api.nytimes.com",
+        "API_Key": "l9LNBrMGukKG5KPrcJdSZyH02lK3KGS1"
+    }
+}
