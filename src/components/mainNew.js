@@ -1,7 +1,7 @@
 import React from 'react'
 import PropType from 'prop-types'
-import { Card } from 'antd'
-
+import { Card, Tag } from 'antd'
+import moment from 'moment'
 export const MainNew = (props) => {
 
     const { Meta } = Card;
@@ -13,10 +13,18 @@ export const MainNew = (props) => {
             title={props.NewData.pubTitle}>
             <Card
                 hoverable
-                cover={<img alt="example" src={props.NewData.pubImg} />}
+                cover={
+                    <div className='img-bg-container' style={{ backgroundImage: `url(${props.NewData.pubImg})` }}>
+                    </div>
+                }
             >
                 <Meta
-                    title={props.NewData.pubTitle}
+                    title={
+                        <>
+                            {props.NewData.pubTitle}
+                            <Tag className='mx-2' color={"processing"}>{props.NewData.pubTag}</Tag>
+                        </>
+                    }
                     description={
                         <div>
                             <p className='p-0'>
@@ -24,6 +32,10 @@ export const MainNew = (props) => {
                             </p>
                             <p className='m-0 p-0 float-end text-primary-emphasis'>
                                 {props.NewData.pubAuthor}
+                            </p>
+                            <br />
+                            <p className='m-0 p-0 float-end'>
+                                {moment(props.NewData.pubDate).format("DD MMM, YYYY")}
                             </p>
                         </div>
                     }
