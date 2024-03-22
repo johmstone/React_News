@@ -19,14 +19,15 @@ body {
 .mainTitle {
     transition: color 1s, font-size 1s;
 }
+
 .mainTitle:hover {
     color: blue;
-    font-size: calc(1.375rem + 2.5vw);    
+    font-size: calc(1.375rem + 2.5vw);
 }
 
 .img-bg-container {
     width: 500px;
-    height: 300px;    
+    height: 300px;
     background-size: cover;
     background-position: center;
     color: white;
@@ -35,9 +36,21 @@ body {
 
 .img-bg-container-small {
     width: 120px;
-    height: 80px;    
+    height: 80px;
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
+}
+
+.secondary-news {
+    display: none;
+}
+
+/* Responsive Desing */
+@media (min-width: 768px) {
+    .secondary-news {
+        display: block;
+    }
+
 }
