@@ -7,12 +7,12 @@
 1. Clone this repository: `git clone https://github.com/johmstone/react_news.git`
 2. Navigate to the project directory: `cd react_news`
 3. Run the following command to build the Docker image:
-`docker build -t my-react-app .`
+`docker build -t react_news .`
 
 
 ## Execution Instructions
 1. Once the Docker image is successfully built, execute the following command to start a Docker container:
-`docker run -it -p 3000:3000 my-react-app`
+`docker run -it -p 3000:3000 react_news`
 
 
 ## Access Instructions
