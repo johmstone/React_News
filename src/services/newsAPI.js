@@ -9,11 +9,11 @@ class NewsAPIServices {
         let baseURL = Parameters.NewsAPI.MainURL
 
         if (StartDate === null) {
-            baseURL = baseURL + `/v2/everything?sortBy=publishedAt&q=${TagName}&apiKey=${Parameters.NewsAPI.API_Key}`;
+            baseURL = baseURL + `/v2/everything?sortBy=publishedAt&pageSize=10&q=${TagName}&apiKey=${Parameters.NewsAPI.API_Key}`;
         } else {
             let srtCurrentDate = moment(StartDate).format("YYYY-MM-DD")
             let strNextDate = moment(EndDate).format('YYYY-MM-DD')
-            baseURL = baseURL + `/v2/everything?sortBy=publishedAt&q=${TagName}&from=${srtCurrentDate}&to=${strNextDate}&apiKey=${Parameters.NewsAPI.API_Key}`
+            baseURL = baseURL + `/v2/everything?sortBy=publishedAt&pageSize=10&q=${TagName}&from=${srtCurrentDate}&to=${strNextDate}&apiKey=${Parameters.NewsAPI.API_Key}`
         }
         var requestOptions = {
             method: 'GET',
@@ -27,7 +27,8 @@ class NewsAPIServices {
                 }
             })
             .then(json => {
-                let parseData = json.response.results.map((item, i) => {
+                let jsonFilter = json.articles.filter(item => item.urlToImage !== null)
+                let parseData = jsonFilter.map((item, i) => {
                     return {
                         pubDate: item.publishedAt,
                         pubTitle: item.title,
@@ -36,7 +37,7 @@ class NewsAPIServices {
                         pubImg: item.urlToImage,
                         pubSource: item.source.name,
                         pubAuthor: item.author,
-                        pubTag: null,
+                        pubTag: TagName ? TagName : item.source.name,
                         pubSourceCall: "NewsAPI"
                     }
                 })

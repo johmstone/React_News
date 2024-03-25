@@ -20,10 +20,11 @@ export const MainNew = (props) => {
             >
                 <Meta
                     title={
-                        <>
-                            {props.NewData.pubTitle}
-                            <Tag className='mx-2' color={"processing"}>{props.NewData.pubTag}</Tag>
-                        </>
+                        <div>
+                            <Tag className='m-0' color={"processing"}>{props.NewData.pubTag}</Tag>
+                            <br/>
+                            {props.NewData.pubTitle}                            
+                        </div>
                     }
                     description={
                         <div>

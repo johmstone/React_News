@@ -8,6 +8,7 @@ import { MainNew } from './mainNew'
 import NewsAPIServices from '../services/newsAPI'
 import NewTimesAPIServices from '../services/newTimesAPI'
 import TheGuardianAPIServices from '../services/theGuardianAPI'
+import { SearchButton } from './searchButton'
 
 export const Home = () => {
 
@@ -60,7 +61,7 @@ export const Home = () => {
         try {
             const newTimesRes = await NewTimesSVC.ByTagOrDate(TagName, null, null);
             const theNewsAPIRes = await NewsAPISVC.Search(TagName, null, null);
-
+            console.log(theNewsAPIRes)
 
             if (newTimesRes.lenght > 0) {
                 const mainNewItem = newTimesRes[0];
@@ -97,6 +98,22 @@ export const Home = () => {
         }
     };
 
+    const HandleCallbackFn = async (data) => {
+        console.log(data)
+        const theNewsAPIRes = await NewsAPISVC.Search(data.SearchText, data.StartDate, data.EndDate);
+        const mainNewItem = theNewsAPIRes[0];
+        setMainNewItem(mainNewItem);
+        const restOfNewTimesRes = theNewsAPIRes.slice(1);
+        setNewsList(restOfNewTimesRes);
+        setTagList([])
+        const uniqueTags = new Set();
+        restOfNewTimesRes.forEach(element => {
+            uniqueTags.add(element.pubTag);
+        });
+        const newTags = TagList.concat(Array.from(uniqueTags));
+        setTagList(newTags.sort());
+    }
+
     const SearchByTag = (data) => {
         console.log(data);
         SearchDataByTag(data);
@@ -114,6 +131,7 @@ export const Home = () => {
                 <i className="fa-solid fa-caret-left ms-3"></i>
             </p>
             <hr />
+            <SearchButton CallBackFunction={HandleCallbackFn} />
             <div className='row m-0 p-0'>
                 <div className='col-md-8 main-news'>
                     <MainNew NewData={MainNewItem} />
@@ -217,6 +235,7 @@ export const Home = () => {
                     </div>
                 </div>
             </div>
+            <div className='FixFooter'></div>
         </div>
     )
 }

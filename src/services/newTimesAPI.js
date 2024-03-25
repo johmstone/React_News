@@ -31,7 +31,8 @@ class NewTimesAPIServices {
                         pubURL: item.web_url,
                         pubImg: item.multimedia[0] !== undefined ? "https://static01.nyt.com/" + item.multimedia[0].url : null,
                         pubSource: item.source,
-                        pubAuthor: item.byline.original.replace("By ",""),
+                        // pubAuthor: item.byline.original,
+                        pubAuthor: item.byline.original !== null ? item.byline.original.replace("By ","") : null,
                         pubTag: item.section_name,
                         pubSourceCall: "NewTimes"
                     }
@@ -74,7 +75,8 @@ class NewTimesAPIServices {
                         pubURL: item.web_url,
                         pubImg: item.multimedia[0] !== undefined ? "https://static01.nyt.com/" + item.multimedia[0].url : null,
                         pubSource: item.source,
-                        pubAuthor: item.byline.original.replace("By ",""),
+                        // pubAuthor: item.byline.original,
+                        pubAuthor: item.byline.original !== null ? item.byline.original.replace("By ","") : null,
                         pubTag: item.section_name,
                         pubSourceCall: "NewTimes"
                     }
@@ -119,7 +121,7 @@ class NewTimesAPIServices {
             })
             .then(json => { 
                 let parseData = json.response.docs.map((item,i) => {
-                    console.log(item.byline.original)
+                    // console.log(item.byline.original)
                     return {
                         pubDate: item.pub_date,
                         pubTitle: item.headline.main,
@@ -127,6 +129,7 @@ class NewTimesAPIServices {
                         pubURL: item.web_url,
                         pubImg: item.multimedia[0] !== undefined ? "https://static01.nyt.com/" + item.multimedia[0].url : null,
                         pubSource: item.source,
+                        // pubAuthor: item.byline.original,
                         pubAuthor: item.byline.original !== null ? item.byline.original.replace("By ","") : null,
                         pubTag: item.section_name,
                         pubSourceCall: "NewTimes"
